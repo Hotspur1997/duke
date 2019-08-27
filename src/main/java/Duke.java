@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) {
         Task schedule = new Task();
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -21,8 +22,19 @@ public class Duke {
                     if (token[0].equals("done")) {
                         schedule.update_list(token[1]);
                     } else {
-                        schedule.add(command);
-                        System.out.println("added: " + command);
+                        Parser parser = new Parser(command);
+                        String result = parser.Type();
+                        switch(result) {
+                            case "todo":
+                                schedule.add(parser.createToDo());
+                                break;
+                            case "event":
+                                schedule.add(parser.createEvent());
+                                break;
+                            case "deadline":
+                                schedule.add(parser.createDeadline());
+                                break;
+                        }
                     }
                 }
             } else {
