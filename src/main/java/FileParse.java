@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileParse {
-    public String filePath = "./src/main/Data/duke.txt";
+    private DateTimeParser dt_parser = new DateTimeParser();
+    private String filePath = "./src/main/Data/duke.txt";
     public void save_file(ArrayList<Request> list) throws DukeException {
         File f = new File(filePath);
         try {
@@ -34,9 +35,17 @@ public class FileParse {
              String description = token[2].strip();
              ArrayList<Request> to_do = schedule.retrieve_list();
              if (type.equals("D")) {
-                 to_do.add(new Deadline(description, token[3].strip()));
+                 try {
+                     to_do.add(new Deadline(description, dt_parser.parseStringToDate(token[3].strip())));
+                 } catch (DukeException e) {
+                     to_do.add(new Deadline(description, token[3].strip()));
+                 }
              } else if (type.equals("E")) {
-                to_do.add(new Event(description, token[3].strip()));
+                 try {
+                     to_do.add(new Event(description, dt_parser.parseStringToDate(token[3].strip())));
+                 } catch (DukeException e) {
+                     to_do.add(new Event(description, token[3].strip()));
+                 }
              } else if (type.equals("T")) {
                  to_do.add(new ToDo(description));
              }
