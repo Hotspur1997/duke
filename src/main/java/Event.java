@@ -8,4 +8,8 @@ public class Event extends Request {
     public String print_req() {
         return "[E]" + result() + " " + getName() + " (at: " + dtime + ")";
     }
+    @Override
+    public String file_format() {
+        return "E | " + index() + " | " + getName() + " | " + dtime;
+    }
 }

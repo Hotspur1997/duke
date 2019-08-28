@@ -8,4 +8,8 @@ public class Deadline extends Request {
     public String print_req() {
         return "[D]" + result() + " " + getName() + " (by: " + ddate + ")";
     }
+    @Override
+    public String file_format() {
+        return "D | " + index() + " | " + getName() + " | " + ddate;
+    }
 }

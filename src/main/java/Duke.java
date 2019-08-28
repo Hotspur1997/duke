@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) throws DukeException {
         Task schedule = new Task();
-
+        FileParse fileManager = new FileParse();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,6 +11,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello I'm Duke!\nWhat can I do for you?");
+        fileManager.load_file(schedule);
         while (true) { //keep checking until we encounter the "bye" command
             Scanner input = new Scanner(System.in);
             String command = input.nextLine();
@@ -28,19 +29,22 @@ public class Duke {
                             case "todo":
                                 schedule.add(parser.createToDo());
                                 break;
+
                             case "event":
                                 schedule.add(parser.createEvent());
                                 break;
+
                             case "deadline":
                                 schedule.add(parser.createDeadline());
                                 break;
+
                             default:
                                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-
                         }
                     }
                 }
             } else {
+                fileManager.save_file(schedule.retrieve_list());
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }

@@ -24,6 +24,12 @@ class Request { //controls each element inside the to-do list
     public String print_req() {
         return result() + " " + name;
     }
+    public int index() {
+        return (completed ? 1 : 0);
+    }
+    public String file_format() {
+        return "";
+    }
 }
 
 class Task { //this is the controller of the entire to-do list
@@ -60,5 +66,9 @@ class Task { //this is the controller of the entire to-do list
         for (int i = 0; i < to_do.size(); i++) {
             System.out.println((i + 1) + "." + to_do.get(i).print_req());
         }
+    }
+
+    public ArrayList<Request> retrieve_list() {
+        return to_do;
     }
 }
