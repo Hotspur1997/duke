@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Task schedule = new Task();
 
         String logo = " ____        _        \n"
@@ -34,6 +34,9 @@ public class Duke {
                             case "deadline":
                                 schedule.add(parser.createDeadline());
                                 break;
+                            default:
+                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
                         }
                     }
                 }
