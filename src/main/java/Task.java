@@ -60,6 +60,20 @@ class Task { //this is the controller of the entire to-do list
         }
     }
 
+    public void remove_item(String req) throws IndexOutOfBoundsException {
+        try {
+            String[] token = req.split(" ");
+            int index = Integer.parseInt(token[1]);
+            index--;
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(to_do.get(index).print_req());
+            to_do.remove(index);
+            System.out.println("Now you have " + to_do.size() + " tasks in the list.");
+        } catch(IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("The list is not that large, please try again");
+        }
+    }
+
     //prints the entire list
     public void print_list() {
         System.out.println("Here are the tasks in your list:");
