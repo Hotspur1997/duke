@@ -39,6 +39,7 @@ public class Duke {
                                 break;
                             case "find":
                                 schedule.find(command);
+                                break;
                             case "delete":
                                 schedule.remove_item(command);
                                 break;
