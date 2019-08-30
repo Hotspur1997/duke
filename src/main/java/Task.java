@@ -71,4 +71,19 @@ class Task { //this is the controller of the entire to-do list
     public ArrayList<Request> retrieve_list() {
         return to_do;
     }
+
+    public void find(String command) throws DukeException {
+        String[] token = command.split(" ");
+        if (token.length != 2 || token[1] == null) {
+            throw new DukeException ("find cannot be empty");
+        }
+        String query = token[1];
+        int index = 1;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Request i: to_do) {
+            if (i.getName().contains(query)) {
+                System.out.println(index++ + "." + i.print_req());
+            }
+        }
+    }
 }

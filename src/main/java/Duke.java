@@ -37,7 +37,9 @@ public class Duke {
                             case "deadline":
                                 schedule.add(parser.createDeadline());
                                 break;
-
+                            case "find":
+                                schedule.find(command);
+                                break;
                             default:
                                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
