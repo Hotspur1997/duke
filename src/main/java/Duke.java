@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws Exception {
         Task schedule = new Task();
         FileParse fileManager = new FileParse();
         String logo = " ____        _        \n"
@@ -49,7 +49,6 @@ public class Duke {
                     }
                 }
             } else {
-                fileManager.save_file(schedule.retrieve_list());
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }
