@@ -1,2 +1,2 @@
-T | 0 | borrow book
-D | 0 | return book | 2019-09-08T15:04:24.026728
+T | 1 | borrow book
+D | 1 | return book | 2019-09-08T15:04:24.000026728

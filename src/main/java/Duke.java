@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Duke {
     public static void main(String[] args) throws Exception {
         Task schedule = new Task();
+        Ui ui = new Ui();
         FileParse fileManager = new FileParse();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -13,42 +14,10 @@ public class Duke {
         System.out.println("Hello I'm Duke!\nWhat can I do for you?");
         fileManager.load_file(schedule);
         while (true) { //keep checking until we encounter the "bye" command
-            Scanner input = new Scanner(System.in);
-            String command = input.nextLine();
-            if (!command.equals("bye")) {
-                if (command.equals("list")) {
-                    schedule.print_list();
-                } else {
-                    String[] token = command.split(" "); //consider the "done 2" case
-                    if (token[0].equals("done")) {
-                        schedule.update_list(token[1]);
-                    } else {
-                        Parser parser = new Parser(command);
-                        String result = parser.Type();
-                        switch(result) {
-                            case "todo":
-                                schedule.add(parser.createToDo());
-                                break;
-
-                            case "event":
-                                schedule.add(parser.createEvent());
-                                break;
-
-                            case "deadline":
-                                schedule.add(parser.createDeadline());
-                                break;
-                            case "find":
-                                schedule.find(command);
-                                break;
-                            case "delete":
-                                schedule.remove_item(command);
-                                break;
-                            default:
-                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                        }
-                    }
-                }
-            } else {
+            String command = ui.readCommand();
+            Parser parser = new Parser(command);
+            parser.parseCommand(schedule);
+            if (parser.isExit()) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             }

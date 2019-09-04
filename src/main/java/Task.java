@@ -41,7 +41,7 @@ class Task { //this is the controller of the entire to-do list
     }
 
     //adds item inside to-do list
-    public void add(Request d) throws Exception {
+    public void add(Request d) {
         to_do.add(d);
         System.out.println("Got it. I've added this task: ");
         System.out.println(d.print_req());
@@ -49,24 +49,27 @@ class Task { //this is the controller of the entire to-do list
         try {
             fp.save_file(to_do);
         } catch (Exception e) {
-            throw new Exception("File error is: " + e.getMessage());
+           System.err.println("File error is: " + e.getMessage());
         }
     }
 
     //marks the queried item as done
-    public void update_list(String request) throws Exception {
+    public void update_list(String request) {
         int index = Integer.parseInt(request);
         index--;
         try {
             to_do.get(index).markAsDone();
             System.out.println("Nice! I've marked this task as done");
             System.out.println("[✓] " + to_do.get(index).getName());
+            fp.save_file(to_do);
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("There are not that many tasks in the list please try again");
+           System.err.println("There are not that many tasks in the list please try again");
+        } catch(Exception e) {
+            System.err.println(e.getMessage());
         }
     }
 
-    public void remove_item(String req) throws Exception {
+    public void remove_item(String req) {
         try {
             String[] token = req.split(" ");
             int index = Integer.parseInt(token[1]);
@@ -77,9 +80,9 @@ class Task { //this is the controller of the entire to-do list
             System.out.println("Now you have " + to_do.size() + " tasks in the list.");
             fp.save_file(to_do);
         } catch(IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("The list is not that large, please try again");
+            System.err.println("The list is not that large, please try again");
         } catch (Exception e) {
-            throw new Exception("File error is: " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
