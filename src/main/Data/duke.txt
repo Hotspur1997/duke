@@ -1,2 +1,5 @@
 T | 1 | borrow book
 D | 1 | return book | 2019-09-08T15:04:24.000026728
+T | 0 | buy food
+D | 0 | hospital appointment | 2019-09-08T16:38:21.631278
+E | 1 | date | Mon 2-4pm
