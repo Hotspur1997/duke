@@ -1,38 +1,63 @@
 import java.util.ArrayList;
 
-class Request { //controls each element inside the to-do list
+/*
+ * superclass for all tasks in the list
+ */
+class Request {
     private String name;
     private boolean completed;
 
+    /*
+     * constructor for the request class
+     * @param name: description of the string
+     */
     public Request(String name) {
         this.name = name;
         this.completed = false;
     }
-
+    /*
+     * marks the particular task as completed
+     */
     public void markAsDone() {
         completed = true;
     }
 
-    //returns the symbol to be printed depending on the status of the item
+    /*
+     * checks if the task is completed and returns the relevant symbol
+     */
     public String result() {
         return (completed ? "[✓]" : "[✗]");
     }
-
+    /*
+     * return the description of the task
+     */
     public String getName() {
         return name;
     }
+    /*
+     * prints the task on the command line
+     */
     public String print_req() {
         return result() + " " + name;
     }
+    /*
+     * returns an integer depending on wether the task is complete
+     */
     public int index() {
         return (completed ? 1 : 0);
     }
+    /*
+     * return a string denoting the format of the task in the txt file
+     */
     public String file_format() {
         return "";
     }
 }
 
-class Task { //this is the controller of the entire to-do list
+/*
+ * class to control the entire to-do list
+ */
+class Task {
     private ArrayList<Request> to_do;
     FileParse fp;
     public Task() {
@@ -40,7 +65,10 @@ class Task { //this is the controller of the entire to-do list
         fp = new FileParse();
     }
 
-    //adds item inside to-do list
+    /*
+     * adds item inside to-do list
+     * @param d: a task to be added into the list
+     */
     public void add(Request d) {
         to_do.add(d);
         System.out.println("Got it. I've added this task: ");
@@ -53,7 +81,10 @@ class Task { //this is the controller of the entire to-do list
         }
     }
 
-    //marks the queried item as done
+    /*
+     * marks the queried item as done
+     * @param request: index of the task to mark as done
+     */
     public void update_list(String request) {
         int index = Integer.parseInt(request);
         index--;
@@ -68,7 +99,10 @@ class Task { //this is the controller of the entire to-do list
             System.err.println(e.getMessage());
         }
     }
-
+    /*
+     * removes the item from the list
+     * @param req: the index of the task to remove
+     */
     public void remove_item(String req) {
         try {
             String[] token = req.split(" ");
@@ -86,18 +120,25 @@ class Task { //this is the controller of the entire to-do list
         }
     }
 
-    //prints the entire list
+    /*
+     *prints the entire list
+     */
     public void print_list() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < to_do.size(); i++) {
             System.out.println((i + 1) + "." + to_do.get(i).print_req());
         }
     }
-
+    /*
+     * return the entire to_do list
+     */
     public ArrayList<Request> retrieve_list() {
         return to_do;
     }
-
+    /*
+     * finds an item with a specific keyword in the list
+     * @param command: string containing the keyword to be found
+     */
     public void find(String command) throws DukeException {
         String[] token = command.split(" ");
         if (token.length != 2 || token[1] == null) {

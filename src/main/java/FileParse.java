@@ -1,12 +1,19 @@
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/*
+ * class to handle writing into the txt file and reading from txt file
+ */
 public class FileParse {
+    private String f_path = System.getProperty("user.dir");
     private DateTimeParser dt_parser = new DateTimeParser();
-    private String filePath = "./src/main/Data/duke.txt";
+    private String filePath = "src/main/Data/duke.txt";
+    /*
+     * function to write to txt file
+     * @param list: to do list of duke
+     */
     public void save_file(ArrayList<Request> list) throws DukeException {
         File f = new File(filePath);
         try {
@@ -27,6 +34,11 @@ public class FileParse {
             throw new DukeException("File error is: " + e.getMessage());
         }
     }
+    /*
+     * function to read a line of the txt file
+     * @param list: to do list of duke
+     * @param schedule: class to handle updating operations of the list
+     */
     public void line_parse(Task schedule, String line) throws DukeException{
          String[] token = line.split("\\|");
          try {
@@ -54,6 +66,10 @@ public class FileParse {
              throw new DukeException (e.getMessage());
          }
     }
+    /*
+     * function to load the txt file information onto the to_do list
+     * @param schedule: class to handle the update operations of duke
+     */
     public void load_file(Task schedule) throws DukeException {
         try {
             File f = new File(filePath);

@@ -1,13 +1,22 @@
+/*
+ * class to handle the command of the user
+ */
 public class Parser {
     private String command;
     private boolean isExit;
     private DateTimeParser dt_parser = new DateTimeParser();
-
+    /*
+     * constructor of the parser
+     * @param command: type of command to handle
+     */
     public Parser(String command) {
         this.command = command;
         isExit = false;
     }
-
+     /*
+      * function to handle the command
+      * @param schedule: class to handle the various commands in duke
+      */
     public void parseCommand(Task schedule) {
         String[] token = command.split(" ");
         String action = token[0];
@@ -44,10 +53,15 @@ public class Parser {
                 System.err.println(e.getMessage());
         }
     }
+    /*
+     * check if the 'bye' command has been entered
+     */
     public boolean isExit() {
         return isExit;
     }
-
+    /*
+     * creates a deadline class
+     */
     public Deadline createDeadline() throws DukeException{
         String[] token = command.substring("deadline".length()).strip().split("/by");
         if (token.length != 2 || token[1] == null) {
@@ -62,6 +76,9 @@ public class Parser {
             return new Deadline(token[0].strip(),token[1].strip());
         }
     }
+    /*
+     * creates an event class
+     */
     public Event createEvent() throws DukeException {
         String[] token = command.substring("event".length()).strip().split("/at");
         if (token.length != 2 || token[1] == null) {
@@ -76,6 +93,9 @@ public class Parser {
             return new Event(token[0].strip(),token[1].strip());
         }
     }
+    /*
+     * creates a to do class
+     */
     public ToDo createToDo() throws DukeException {
         String token = command.substring("todo".length()).strip();
         if (token.strip().isEmpty()) {

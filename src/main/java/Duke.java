@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/*
+ * main class of duke
+ */
 public class Duke {
     public static void main(String[] args) throws Exception {
         Task schedule = new Task();
@@ -14,12 +17,12 @@ public class Duke {
         System.out.println("Hello I'm Duke!\nWhat can I do for you?");
         fileManager.load_file(schedule);
         while (true) { //keep checking until we encounter the "bye" command
-            String command = ui.readCommand();
-            Parser parser = new Parser(command);
-            parser.parseCommand(schedule);
-            if (parser.isExit()) {
+            String command = ui.readCommand(); //read the command of the user input
+            Parser parser = new Parser(command); //create a new parser class for the command
+            parser.parseCommand(schedule); //handle the command accordingly
+            if (parser.isExit()) { //check if bye has been entered into the input
                 System.out.println("Bye. Hope to see you again soon!");
-                break;
+                break; //exit the program
             }
         }
     }
