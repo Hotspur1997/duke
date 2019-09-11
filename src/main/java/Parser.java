@@ -13,6 +13,13 @@ public class Parser {
         this.command = command;
         isExit = false;
     }
+    /*
+     * @param command: type of command to handle
+     */
+    public String extract() {
+        String[] token = command.split(" ");
+        return token[0];
+    }
      /*
       * function to handle the command
       * @param schedule: class to handle the various commands in duke

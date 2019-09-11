@@ -130,6 +130,12 @@ class Task {
         }
     }
     /*
+     * return the size of the list
+     */
+     public int size() {
+         return to_do.size();
+     }
+    /*
      * return the entire to_do list
      */
     public ArrayList<Request> retrieve_list() {
